@@ -6,7 +6,6 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 from datetime import datetime, timedelta
-from machinelearning import process_image
 from models import User
 from schemas import UserCreate, UserUpdate, User as UserSchema
 from crud import (
