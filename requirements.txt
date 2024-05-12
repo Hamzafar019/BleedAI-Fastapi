@@ -1,0 +1,15 @@
+pip==24.0
+matplotlib==3.5.1
+python-jose[cryptography]
+fastapi[all]
+sqlalchemy
+pandas
+python-multipart
+passlib[bcrypt]
+unicorn[standard]
+cachetools
+fastapi
+mediapipe
+opencv-python
+numpy
+pillow
