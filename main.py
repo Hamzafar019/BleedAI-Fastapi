@@ -12,7 +12,7 @@ from crud import (
     create_user,
     get_user,
     update_user,
-    delete_user,
+    delete_user, 
     search_users,
 )  
 
@@ -143,13 +143,13 @@ async def process_image(image: UploadFile = File(...)):
             annotated_image=cv2.rectangle(img,(x_start, y_start),(x_end,y_end),(0,255,255), 5)
 
     ## for testing
-    # plt.imshow(mesh_img)
-    # plt.axis('off')  # Turn off axis
-    # plt.show()
+    plt.imshow(mesh_img)
+    plt.axis('off')  # Turn off axis
+    plt.show()
 
-    # plt.imshow(annotated_image)
-    # plt.axis('off')  # Turn off axis
-    # plt.show()
+    plt.imshow(annotated_image)
+    plt.axis('off')  # Turn off axis
+    plt.show()
 
 
     temp_filename2 = tempfile.NamedTemporaryFile(suffix=".jpg").name

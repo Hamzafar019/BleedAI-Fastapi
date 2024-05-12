@@ -7,16 +7,16 @@ from cachetools import TTLCache
 cache = TTLCache(maxsize=1000, ttl=60)
 
 def create_user(db: Session, user_data: UserCreate):
-    db_user = User(name=user_data.name)
-    db.add(db_user)
+    user = User(name=user_data.name)
+    db.add(user)
     db.commit()
-    cache[db_user.id] = db_user
-    db.refresh(db_user)
-    return db_user
+    cache[user.id] = user
+    db.refresh(user)
+    return user
 
 def get_user(db: Session, user_id: int):
     if user_id in cache:
-        print("tatt")
+        print("cache")
         return cache[user_id]
     else:
         # Query database to get user
@@ -27,21 +27,20 @@ def get_user(db: Session, user_id: int):
         return user
 
 def update_user(db: Session, user_id: int, user_data: UserUpdate):
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user:
-        db_user.name = user_data.name
+    user = db.query(User).filter(User.id == user_id).first()
+    if user:
+        user.name = user_data.name
         db.commit()
-        cache[db_user.id] = db_user
-        db.refresh(db_user)
+        cache[user_id] = user
+        db.refresh(user)
         
-    return db_user
+    return user
 
 def delete_user(db: Session, user_id: int):
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user:
-        db.delete(db_user)
+    user = db.query(User).filter(User.id == user_id).first()
+    if user:
+        db.delete(user) 
         db.commit()
-        del cache[db_user.id]
         return True
     return False
 
